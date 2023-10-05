@@ -14,13 +14,45 @@ function CardDisplayer(props) {
     );
 }
 
+
+function CardDisplayerDeck(props) {
+    return (
+        <div class="bg-black flex my-2 relative flex-col border border-2 border-black  rounded-xl border-t-0">
+            <img src={props.card.img} alt={props.card.img} class="w-auto h-auto object-cover object-center rounded-lg shadow-md "/>
+            <div class="bg-gradient-to-tr from-gray-300 to-gray-500  shadow-inner border-0 border-black  rounded-xl border-t-0 ">
+                <div class="m-2  flex flex-row justify-center ">
+                    <button onClick={() => props.addSelectedCards(props.card)}   class="
+                        text-center  px-3  h-auto w-auto inline-flex items-center placeholder: text-xl font-bold text-white bg-gradient-to-r from-green-400 via-green-500 to-green-700 hover:bg-gradient-to-br border border-gray-900 rounded-l-3xl ">
+                        <span class="mx-auto">+</span>
+                    </button>
+
+                    <input
+                        type="text"
+                        class=" bg-gray-50 border border-gray-300 text-gray-900 block max-w-1  min-w-0  text-sm p-2.5" 
+                    />
+                    
+
+                    <button onClick={() => props.addSelectedCards(props.card)}   class="
+                        text-center px-3  h-auto w-auto inline-flex items-center  text-xl font-bold text-white bg-gradient-to-r from-red-400 via-red-500 to-red-700 hover:bg-gradient-to-br border border-gray-900 rounded-r-3xl ">
+                        <span class="mx-auto">-</span>
+                    </button>
+                </div>
+            </div>
+            
+        </div>        
+
+
+    );
+}
+
 function CardDisplayerListView(props) {
     return (
         <div
             class="flex flex-row rounded-xl border-2 bg-gray-100 border border-gray-950 w-auto h-auto shadow-xl ms:flex-col" 
-        >
+        >   
+            
             <img
-                class="h-auto w-maw "
+                class="h-auto w-max bg-black rounded-l-md"
                 src={props.card.img}
                 alt="" 
             />
@@ -43,4 +75,4 @@ function CardDisplayerListView(props) {
     )
 }
 
-export {CardDisplayer, CardDisplayerListView};
+export {CardDisplayer, CardDisplayerListView, CardDisplayerDeck};

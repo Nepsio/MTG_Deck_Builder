@@ -1,10 +1,26 @@
 import React from "react";
 import Card from "./component/container/Card";
 import SearchBar from "./component/SearchBar";
-import {CardDisplayer, CardDisplayerListView} from "./component/CardDisplayer";
+import {CardDisplayer, CardDisplayerListView, CardDisplayerDeck} from "./component/CardDisplayer";
 import ButtonWithIcon from "./component/basic/ButtonWithIcon";
 import Grid_box from "../asset/svg/Grid_box.svg";
 import CardListIcon from "../asset/svg/CardListIcon.png";
+
+
+const DeckList = (props) => {
+    let filteredCards = filterCardsWithImage(props.cards);
+    return (
+        <div class="grid grid-cols-5 gap-4">
+            {filteredCards.map((card) => (
+                <CardDisplayerDeck
+                    card = {card}
+                    addSelectedCards={props.addCardToSelection}
+                />
+            ))}
+        </div>
+    );
+
+}
 
 
 const CardList = (props) => {
@@ -98,6 +114,7 @@ class MTGApp extends React.Component {
                                     onClick={() => this.setDisplayStyle("list")}
                                     image={CardListIcon}
                                     text="List"
+                                    customColor="blue"
                                 />
                                 <ButtonWithIcon
                                     onClick={() => this.setDisplayStyle("grid")}
@@ -114,6 +131,7 @@ class MTGApp extends React.Component {
                         </Card>
 
 
+
                         <div class="py-3">
                             <Card title="Resultat de la recherche">
                                 <CardList
@@ -126,7 +144,7 @@ class MTGApp extends React.Component {
 
                         <div class="py-3">
                             <Card title="Selection de cartes">
-                                <CardList
+                                <DeckList
                                     cards={this.state.selectedCards}
                                     displayStyle={this.state.displayStyle}
 

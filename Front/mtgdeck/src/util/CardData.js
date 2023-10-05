@@ -6,7 +6,8 @@ class CardDataIndexor {
             new CardData ( 
                 data.name, 
                 data.imageUrl,
-                data.name
+                data.name,
+                data.text
             )
         );
         if (data.foreignNames != undefined) {
@@ -37,10 +38,11 @@ class CardDataIndexor {
 class CardData {
 
 
-    constructor (name, img, ogName) {
+    constructor (name, img, ogName, description) {
         this.name = name;
         this.img = img;
         this.ogName = ogName;
+        this.description = description;
     }
 
 }

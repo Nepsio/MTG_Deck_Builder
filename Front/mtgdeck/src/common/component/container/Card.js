@@ -3,7 +3,7 @@ import React from "react";
 function Card(props) {
     return (
         <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-           <div class="flex flex-wrap text-sm font-medium  text-gray-500 border-b border-gray-200 rounded-t-lg bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800" id="defaultTab" data-tabs-toggle="#defaultTabContent" role="tablist">
+           <div class="flex flex-wrap text-sm font-medium  text-gray-50 border-b border-gray-200 rounded-t-lg bg-gray-800" id="defaultTab" data-tabs-toggle="#defaultTabContent" role="tablist">
                 <h2 class=" text-center mx-auto my-3  text-xl">{props.title}</h2>
             </div>
             <div>

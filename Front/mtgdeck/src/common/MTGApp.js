@@ -12,7 +12,9 @@ const CardList = (props) => {
             <div class="grid grid-cols-5 gap-4">
                 {filteredCards.map((card) => (
                     <CardDisplayer
+                        card = {card}
                         image={card.img}
+                        addSelectedCards={props.addCardToSelection}
                     />
                 ))}
             </div>
@@ -35,6 +37,7 @@ class MTGApp extends React.Component {
         this.state = {
             searchedCards: [],
             isLoading: false,
+            selectedCards: [],
         };
     }
 
@@ -42,6 +45,12 @@ class MTGApp extends React.Component {
     addNewSearchedCards = (cardData) => {
         this.setState(prevState => ({
             searchedCards: [...prevState.searchedCards, cardData],
+        }));
+    }
+
+    addSelectedCards = (cardData) => {
+        this.setState(prevState => ({
+            selectedCards: [...prevState.selectedCards, cardData],
         }));
     }
 
@@ -67,11 +76,23 @@ class MTGApp extends React.Component {
                         />
                     </Card>
 
-                    <Card title="Selection de cartes">
-                        <CardList
-                            cards={this.state.searchedCards}
-                        />
-                    </Card>
+                    <div class="py-5">
+                        <Card title="Resultat de la recherche">
+                            <CardList
+                                cards={this.state.searchedCards}
+                                addCardToSelection={this.addSelectedCards}
+                            />
+                        </Card>
+                    </div>
+
+                    <div class="py-5">
+                        <Card title="Selection de cartes">
+                            <CardList
+                                cards={this.state.selectedCards}
+                            />
+                        </Card>
+                    </div>
+
                 </div>
             </>
         );

@@ -4,6 +4,7 @@ import SearchBar from "./component/SearchBar";
 import {CardDisplayer, CardDisplayerListView} from "./component/CardDisplayer";
 import ButtonWithIcon from "./component/basic/ButtonWithIcon";
 import Grid_box from "../asset/svg/Grid_box.svg";
+import CardListIcon from "../asset/svg/CardListIcon.png";
 
 
 const CardList = (props) => {
@@ -51,7 +52,7 @@ class MTGApp extends React.Component {
             searchedCards: [],
             isLoading: false,
             selectedCards: [],
-            displayStyle: "list",
+            displayStyle: "grid",
         };
     }
 
@@ -85,51 +86,53 @@ class MTGApp extends React.Component {
     render() {
         return (
             <>
-                <div class="m-5">
-                    <Card title="Formulaire de recherche">
+                <div class="m-5 ">
+                    <div class="py-3">
+                        <Card title="Formulaire de recherche">
 
-                        <div class="flex flex-row">
-                            <div class="px-5">
-                                Mode d'affichage :
+                            <div class="flex flex-row">
+                                <div class="px-5">
+                                    Mode d'affichage :
+                                </div>
+                                <ButtonWithIcon
+                                    onClick={() => this.setDisplayStyle("list")}
+                                    image={CardListIcon}
+                                    text="List"
+                                />
+                                <ButtonWithIcon
+                                    onClick={() => this.setDisplayStyle("grid")}
+                                    image={Grid_box}
+                                    text="Grid"
+                                />
                             </div>
-                            <ButtonWithIcon
-                                onClick={() => this.setDisplayStyle("list")}
-                                image={Grid_box}
-                                text="List"
+
+                            <SearchBar
+                                onSubmit={this.addNewSearchedCards}
+                                resetSearchedCards={this.resetSearchedCards}
+                                displayLoadingSpinner={this.setIsLoading}
                             />
-                            <ButtonWithIcon
-                                onClick={() => this.setDisplayStyle("grid")}
-                                image={Grid_box}
-                                text="Grid"
-                            />
+                        </Card>
+
+
+                        <div class="py-3">
+                            <Card title="Resultat de la recherche">
+                                <CardList
+                                    cards={this.state.searchedCards}
+                                    addCardToSelection={this.addSelectedCards}
+                                    displayStyle={this.state.displayStyle}
+                                />
+                            </Card>
                         </div>
 
-                        <SearchBar
-                            onSubmit={this.addNewSearchedCards}
-                            resetSearchedCards={this.resetSearchedCards}
-                            displayLoadingSpinner={this.setIsLoading}
-                        />
-                    </Card>
+                        <div class="py-3">
+                            <Card title="Selection de cartes">
+                                <CardList
+                                    cards={this.state.selectedCards}
+                                    displayStyle={this.state.displayStyle}
 
-
-                    <div class="py-5">
-                        <Card title="Resultat de la recherche">
-                            <CardList
-                                cards={this.state.searchedCards}
-                                addCardToSelection={this.addSelectedCards}
-                                displayStyle={this.state.displayStyle}
-                            />
-                        </Card>
-                    </div>
-
-                    <div class="py-5">
-                        <Card title="Selection de cartes">
-                            <CardList
-                                cards={this.state.selectedCards}
-                                displayStyle={this.state.displayStyle}
-
-                            />
-                        </Card>
+                                />
+                            </Card>
+                        </div>
                     </div>
 
                 </div>

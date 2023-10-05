@@ -17,7 +17,7 @@ function CardDisplayer(props) {
 function CardDisplayerListView(props) {
     return (
         <div
-            class="flex flex-row rounded-xl border-2 bg-gray-100 border border-gray-950 w-auto h-auto shadow-xl"
+            class="flex flex-row rounded-xl border-2 bg-gray-100 border border-gray-950 w-auto h-auto shadow-xl ms:flex-col" 
         >
             <img
                 class="h-auto w-maw "

@@ -47,46 +47,82 @@ class CardData {
 
 }
 
+
+class CardDeckUnit {
+
+    constructor (card, quantity) {
+        this.cardData = card;
+        this.quantity = quantity;
+    }
+
+    getCardOGName () {
+        return this.cardData.ogName;
+    }
+}
+
 class CardDeck {
 
-    constructor (cards) {
-        this.deck = cards;
-        this.numberOfCardsByCard = this.indexNumberOfCardsInDeck();
+    constructor (cardList) { 
+        this.deck = [];
+        for (let i = 0; i < cardList.length; i++) {
+            this.addCardInDeck(cardList[i]);
+        }
 
     }
 
-    indexNumberOfCardsInDeck() {
-        let res = new Map();
-        for (let i = 0; i < this.deck.length; i++) {
-            if (res.has(this.deck[i].ogName)) {
-                res.set(this.deck[i].ogName, res.get(this.deck[i].ogName) + 1);
+    addCardInDeck (card) {
+        let cardDeckUnit = this.findCardByOGName(card.ogName);
+        if (cardDeckUnit == undefined) {
+            this.deck.push(new CardDeckUnit(card, 1));
+        } else {
+            cardDeckUnit.quantity++;
+        }
+        return this;
+    }
+
+    removeCardInDeck (card) {
+        let cardDeckUnit = this.findCardByOGName(card.ogName);
+        if (cardDeckUnit != undefined) {
+            if (cardDeckUnit.quantity == 1) {
+                this.deck.splice(this.deck.indexOf(cardDeckUnit), 1);
             } else {
-                res.set(this.deck[i].ogName, 1);
+                cardDeckUnit.quantity--;
+            }
+        }
+        if (cardDeckUnit.quantity == 0) {
+            this.deck.splice(this.deck.indexOf(cardDeckUnit), 1);
+        }
+        return this;
+    }
+
+
+    findCardByOGName (ogName) {
+        for (let i = 0; i < this.deck.length; i++) {
+            if (this.deck[i].getCardOGName() == ogName) {
+                return this.deck[i];
+            }
+        }
+        return undefined;
+
+    }
+
+    getCardList () {
+        let res = [];
+        for (let i = 0; i < this.deck.length; i++) {
+            for (let j = 0; j < this.deck[i].quantity; j++) {
+                res.push(this.deck[i].cardData);
             }
         }
         return res;
     }
 
-    addCard(card) {
-        this.deck.push(card);
-        if (this.numberOfCardsByCard.has(card.ogName)) {
-            this.numberOfCardsByCard.set(card.ogName, this.numberOfCardsByCard.get(card.ogName) + 1);
-        } else {
-            this.numberOfCardsByCard.set(card.ogName, 1);
+    getNumberOfCards () {
+        let res = 0;
+        for (let i = 0; i < this.deck.length; i++) {
+            res += this.deck[i].quantity;
         }
+        return res;
     }
-
-    removeCard(card) {
-        let index = this.deck.indexOf(card);
-        if (index > -1) {
-            this.deck.splice(index, 1);
-            if (this.numberOfCardsByCard.has(card.ogName)) {
-                this.numberOfCardsByCard.set(card.ogName, this.numberOfCardsByCard.get(card.ogName) - 1);
-            }
-        }
-    }
-
-
 
 
 }

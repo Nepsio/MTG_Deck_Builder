@@ -5,16 +5,19 @@ import {CardDisplayer, CardDisplayerListView, CardDisplayerDeck} from "./compone
 import ButtonWithIcon from "./component/basic/ButtonWithIcon";
 import Grid_box from "../asset/svg/Grid_box.svg";
 import CardListIcon from "../asset/svg/CardListIcon.png";
+import {CardDataIndexor, CardData, CardDeck} from "../util/CardData";
 
 
 const DeckList = (props) => {
-    let filteredCards = filterCardsWithImage(props.cards);
+    console.log(props.cards);
     return (
         <div class="grid grid-cols-5 gap-4">
-            {filteredCards.map((card) => (
+            {props.cards.map((card) => (
                 <CardDisplayerDeck
-                    card = {card}
+                    card = {card.cardData}
+                    count = {card.quantity}
                     addSelectedCards={props.addCardToSelection}
+                    removeCardInDeck={props.removeCardInDeck}
                 />
             ))}
         </div>
@@ -61,102 +64,90 @@ function filterCardsWithImage(cards) {
     return res;
 }
 
-class MTGApp extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            searchedCards: [],
-            isLoading: false,
-            selectedCards: [],
-            displayStyle: "grid",
-        };
+function MTGApp()  {
+
+    const [searchedCards, setSearchedCards] = React.useState([]);
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [selectedCards, setSelectedCards] = React.useState([]);
+    const [displayStyle, setDisplayStyle] = React.useState("grid");
+    const [cardDeck, setCardDeck] = React.useState(new CardDeck([]));
+
+    const addNewSearchedCards = (cardData) => { 
+        searchedCards.push(cardData);
+        setSearchedCards(searchedCards);
     }
 
-
-    addNewSearchedCards = (cardData) => {
-        this.setState(prevState => ({
-            searchedCards: [...prevState.searchedCards, cardData],
-        }));
+    const addCardInDeck = (cardData) => {
+        cardDeck.addCardInDeck(cardData);
+        setCardDeck(new CardDeck(cardDeck.getCardList()));
     }
 
-    addSelectedCards = (cardData) => {
-        this.setState(prevState => ({
-            selectedCards: [...prevState.selectedCards, cardData],
-        }));
+    const removeCardInDeck = (cardData) => {
+        cardDeck.removeCardInDeck(cardData);
+        setCardDeck(new CardDeck(cardDeck.getCardList()));
     }
 
-    setDisplayStyle = (style) => {
-        this.setState({displayStyle: style});
+    const resetSearchedCards = () => {
+        searchedCards.splice(0, searchedCards.length);
+        setSearchedCards(searchedCards);
     }
 
+    return (
+        <>
+            <div class="m-5 ">
+                <div class="py-3">
+                    <Card title="Formulaire de recherche">
 
-
-    resetSearchedCards = () => {
-        this.setState({ searchedCards: [] });
-    };
-
-    setIsLoading = (isLoading) => {
-        this.setState({isLoading: isLoading});
-    }
-
-    render() {
-        return (
-            <>
-                <div class="m-5 ">
-                    <div class="py-3">
-                        <Card title="Formulaire de recherche">
-
-                            <div class="flex flex-row">
-                                <div class="px-5">
-                                    Mode d'affichage :
-                                </div>
-                                <ButtonWithIcon
-                                    onClick={() => this.setDisplayStyle("list")}
-                                    image={CardListIcon}
-                                    text="List"
-                                    customColor="blue"
-                                />
-                                <ButtonWithIcon
-                                    onClick={() => this.setDisplayStyle("grid")}
-                                    image={Grid_box}
-                                    text="Grid"
-                                />
+                        <div class="flex flex-row">
+                            <div class="px-5">
+                                Mode d'affichage :
                             </div>
+                            <ButtonWithIcon
+                                onClick={() => setDisplayStyle("list")}
+                                image={CardListIcon}
+                                text="List"
+                                customColor="blue"
+                            />
+                            <ButtonWithIcon
+                                onClick={() => setDisplayStyle("grid")}
+                                image={Grid_box}
+                                text="Grid"
+                            />
+                        </div>
 
-                            <SearchBar
-                                onSubmit={this.addNewSearchedCards}
-                                resetSearchedCards={this.resetSearchedCards}
-                                displayLoadingSpinner={this.setIsLoading}
+                        <SearchBar
+                            onSubmit={addNewSearchedCards}
+                            resetSearchedCards={resetSearchedCards}
+                            displayLoadingSpinner={setIsLoading}
+                        />
+                    </Card>
+
+                    <div class="py-3">
+                        <Card title="Resultat de la recherche">
+                            <CardList
+                                cards={searchedCards}
+                                addCardToSelection={addCardInDeck}
+                                displayStyle={displayStyle}
                             />
                         </Card>
-
-
-
-                        <div class="py-3">
-                            <Card title="Resultat de la recherche">
-                                <CardList
-                                    cards={this.state.searchedCards}
-                                    addCardToSelection={this.addSelectedCards}
-                                    displayStyle={this.state.displayStyle}
-                                />
-                            </Card>
-                        </div>
-
-                        <div class="py-3">
-                            <Card title="Selection de cartes">
-                                <DeckList
-                                    cards={this.state.selectedCards}
-                                    displayStyle={this.state.displayStyle}
-
-                                />
-                            </Card>
-                        </div>
                     </div>
 
+                    <div class="py-3">
+                        <Card title="Selection de cartes">
+                            <h2 class=" text-center mx-auto my-3  text-xl">Nombre de cartes : {cardDeck.getNumberOfCards()}</h2>
+                            <DeckList
+                                cards={cardDeck.deck}
+                                displayStyle={displayStyle}
+                                addCardToSelection={addCardInDeck}
+                                removeCardInDeck={removeCardInDeck}
+                            />
+                        </Card>
+                    </div>
                 </div>
-            </>
-        );
-    }
+
+            </div>
+        </>
+    );
 }
 
 export default MTGApp;

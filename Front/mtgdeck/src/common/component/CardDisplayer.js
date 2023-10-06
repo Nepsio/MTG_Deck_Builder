@@ -28,11 +28,12 @@ function CardDisplayerDeck(props) {
 
                     <input
                         type="text"
+                        value={""+props.count}
                         class=" bg-gray-50 border border-gray-300 text-gray-900 block max-w-1  min-w-0  text-sm p-2.5" 
                     />
                     
 
-                    <button onClick={() => props.addSelectedCards(props.card)}   class="
+                    <button onClick={() => props.removeCardInDeck(props.card)}   class="
                         text-center px-3  h-auto w-auto inline-flex items-center  text-xl font-bold text-white bg-gradient-to-r from-red-400 via-red-500 to-red-700 hover:bg-gradient-to-br border border-gray-900 rounded-r-3xl ">
                         <span class="mx-auto">-</span>
                     </button>

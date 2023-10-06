@@ -33,12 +33,12 @@ function SearchBar(props) {
         <>
             <div >
                 <form class="flex" onSubmit={handleSubmit}>
-                    <button class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                    <button class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200  hover:bg-gray-300 border border-r-0 border-gray-500 rounded-l-xl dark:bg-gray-600">
                         <img src={loupe} alt="loupe" class="w-4 h-4" />
                     </button>
                     <input
                         type="text"
-                        class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" 
+                        class="rounded-none rounded-r-lg bg-gray-50 border border-gray-500  text-gray-900 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" 
                         placeholder="Nom de la carte"
                         id="inlineFormInputGroupUsername" 
                         ref={usernameInputRef} required

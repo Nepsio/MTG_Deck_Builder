@@ -3,7 +3,7 @@ function ButtonWithIcon(props) {
     <button 
         type="button" 
         class="text-white bg-gradient-to-r from-blue-700 via-blue-500 to-blue-700 hover:bg-gradient-to-br   font-medium rounded-lg text-sm 
-          text-center inline-flex items-center  mr-9 mb-2"
+          text-center inline-flex items-center  "
         onClick={props.onClick}
     >
         <div class="px-5">
@@ -20,5 +20,17 @@ function ButtonWithIcon(props) {
   );
 }
 
+function DangerButton(props) {
+  return (
+    <button
+      type="button"
+      class="bg-gradient-to-r from-red-700 via-red-500 to-red-700 hover:bg-gradient-to-br text-white font-bold py-2 px-4 rounded"
+      onClick={props.onClick}
+    >
+      {props.text}
+    </button>
+  );
+}
 
-export default ButtonWithIcon;
+
+export  {ButtonWithIcon, DangerButton};

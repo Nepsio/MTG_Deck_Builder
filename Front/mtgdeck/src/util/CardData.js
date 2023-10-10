@@ -5,23 +5,12 @@ class CardDataIndexor {
         this.data.set('English',
             new CardData ( 
                 data.name, 
-                data.imageUrl,
+                data.image_uris.normal,
+                data.image_uris.art_crop,
                 data.name,
-                data.text
+                data.oracle_text
             )
         );
-        if (data.foreignNames != undefined) {
-            for (let i = 0 ; i < data.foreignNames.length; i++) {
-                this.data.set(
-                    data.foreignNames[i].language, 
-                    new CardData( 
-                        data.foreignNames[i].name, 
-                        data.foreignNames[i].imageUrl,
-                        data.name
-                    )
-                );
-            }
-        }
     }
 
 
@@ -38,9 +27,10 @@ class CardDataIndexor {
 class CardData {
 
 
-    constructor (name, img, ogName, description) {
+    constructor (name, img, croppedImg, ogName, description) {
         this.name = name;
         this.img = img;
+        this.croppedImg = croppedImg;
         this.ogName = ogName;
         this.description = description;
     }

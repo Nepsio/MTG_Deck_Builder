@@ -5,7 +5,7 @@ function Card(props) {
     const [displayBody, setDisplayBody] = React.useState(true);
 
     return (
-        <div class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div class="w-full bg-white border border-gray-200 rounded-lg shadow max-h-screen  dark:bg-gray-800 dark:border-gray-700">
            <div class="flex flex-wrap text-sm font-medium px-9  text-gray-50 border-b border-gray-200 rounded-t-lg bg-gray-800" id="defaultTab" data-tabs-toggle="#defaultTabContent" role="tablist">
                 <h2 class=" text-center mx-auto my-3  text-xl">{props.title}</h2>
                 <button onClick={() => setDisplayBody(!displayBody)} >
@@ -14,8 +14,10 @@ function Card(props) {
             </div>
             { displayBody ?
                 <div >
-                    <div class="p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="about" role="tabpanel" aria-labelledby="about-tab">
-                        {props.children}    
+                    <div class="p-4 bg-white rounded-lg md:p-8  dark:bg-gray-800 "  role="tabpanel" >
+                        <div class="max-h-screen  ">
+                            {props.children}
+                        </div>  
                     </div>
                 </div>
                     :
@@ -27,5 +29,28 @@ function Card(props) {
 }
 
 
+function CardSection(props) {
+    return  (
+            <div class="m-5">
+                {props.children}
+            </div>
+    );
+}
 
-export default Card;
+function CardSectionScrollable(props) {
+    const  existChild = props.children != null;
+    return (
+        existChild ?
+            <div class="flex flex-row justify-center pb-4  ">
+                <div class="flex flex-row border p-7 rounded-3xl  border-gray-500 max-h-screen overflow-y-auto">
+                    {props.children}
+                </div>
+            </div>
+        :
+            null
+    );
+}
+
+
+
+export {Card, CardSection, CardSectionScrollable};

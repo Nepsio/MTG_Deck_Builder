@@ -1,4 +1,5 @@
 import React from "react";
+import gear from "../../asset/svg/gear.png";
 
 function CardDisplayer(props) {
     return (
@@ -46,6 +47,30 @@ function CardDisplayerDeck(props) {
     );
 }
 
+
+function CardDeckDisplayerListView(props) {
+    return (
+        <div class="flex flex-row">
+            <div class="border grid grid-cols-5  h-rounded border-gray-500 rounded-l-full  rounded-r-full">   
+                <div>
+                    <img src={props.card.croppedImg} alt={props.card.croppedImg} class="rounded-l-full h-full rounded-xl border border-gray-700  "/>
+                </div>
+
+                <div class="px-5 col-span-3 my-auto ²">
+                    <p class="text-xs text-center">{props.card.name}</p>
+                </div>
+
+                <div class='border  border-l-gray-700 rounded-r-full  bg-gray-300 ' >
+                    <div class='text-center' >
+                            {props.count}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        );
+}
+
 function CardDisplayerListView(props) {
     return (
         <div
@@ -76,4 +101,4 @@ function CardDisplayerListView(props) {
     )
 }
 
-export {CardDisplayer, CardDisplayerListView, CardDisplayerDeck};
+export {CardDisplayer, CardDisplayerListView, CardDisplayerDeck, CardDeckDisplayerListView};

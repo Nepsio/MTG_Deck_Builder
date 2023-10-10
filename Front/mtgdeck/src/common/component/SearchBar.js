@@ -15,15 +15,15 @@ function SearchBar(props) {
         event.preventDefault();
         props.resetSearchedCards();
         props.displayLoadingSpinner(true);
-
-        const languageParam = '';
-        const resp = await axios.get(`https://api.magicthegathering.io/v1/cards?name=${userName}${languageParam}&pageSize=60`);
+        
+        const resp = await axios.get(`https://api.scryfall.com/cards/search?q=${userName}`);
 
 
         
         props.displayLoadingSpinner(false);
-        for (var i = 0; i < resp.data.cards.length; i++) {
-            let cardData = new CardDataIndexor(resp.data.cards[i]);
+        const cardData = resp.data.data;
+        for (var i = 0; i < cardData.length; i++) {
+            let cardData = new CardDataIndexor(resp.data.data[i]);
             props.onSubmit(cardData.getCardData("English"));
         }
     }

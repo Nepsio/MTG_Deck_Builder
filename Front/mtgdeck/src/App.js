@@ -6,12 +6,10 @@ import MTGApp from './common/MTGApp';
 
 function App() {
   return (
-    <>
-      <Navbar/>
-      <MTGApp/>
-
-
-    </>
+      <>
+        <Navbar/>
+        <MTGApp/>
+      </>
   );
 }
 

@@ -5,20 +5,25 @@ import {CardDisplayer, CardDisplayerListView, CardDisplayerDeck, CardDeckDisplay
 import {ButtonWithIcon, DangerButton} from "./component/basic/Button";
 import Grid_box from "../asset/svg/Grid_box.svg";
 import CardListIcon from "../asset/svg/CardListIcon.png";
-import {CardDataIndexor, CardData, CardDeck} from "../util/CardData";
+import { CardDeck} from "../util/CardData";
+import { Fade} from 'react-awesome-reveal';
+import ProgressBar from "./component/basic/ProgressBar";
 
 
 const DeckList = (props) => {
     console.log(props.cards);
+    const [modalIsDisplayed, setModalIsDisplayed] = React.useState(false);
     return (
         <div class="grid grid-cols-1 gap-4">
             {props.cards.map((card) => (
-                <CardDeckDisplayerListView
-                    card = {card.cardData}
-                    count = {card.quantity}
-                    addSelectedCards={props.addCardToSelection}
-                    removeCardInDeck={props.removeCardInDeck}
-                />
+                    <CardDeckDisplayerListView
+                        card = {card.cardData}
+                        count = {card.quantity}
+                        addSelectedCards={props.addCardToSelection}
+                        removeCardInDeck={props.removeCardInDeck}
+                        setModalIsDisplayed={setModalIsDisplayed}
+                        modalIsDisplayed={modalIsDisplayed}
+                    />
             ))}
         </div>
     );
@@ -30,7 +35,7 @@ const CardList = (props) => {
     let filteredCards = filterCardsWithImage(props.cards);
     if (props.displayStyle == "list") {
         return (
-            <div class="grid grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 gap-4">
                 {filteredCards.map((card) => (
                     <CardDisplayerListView
                         card = {card}
@@ -43,10 +48,12 @@ const CardList = (props) => {
         return (
             <div class="grid grid-cols-3 xl:grid-cols-5 gap-4">
                 {filteredCards.map((card) => (
-                    <CardDisplayer
-                        card = {card}
-                        addSelectedCards={props.addCardToSelection}
-                    />
+                    <Fade delay={250} triggerOnce > 
+                        <CardDisplayer
+                            card = {card}
+                            addSelectedCards={props.addCardToSelection}
+                        />
+                    </Fade>
                 ))}
             </div>
         );
@@ -101,44 +108,26 @@ function MTGApp()  {
                     <div class="grid xl:grid-cols-3  md:grid-cols-3 sm:grid-cols-1  ">
 
                         <div class="py-3 xl:col-span-2  md:col-span-2 sm:col-span-1 pr-10">
-                            <Card title="Data Base">
-
-                                <CardSection>
-                                    <DisplayPanel
-                                        setDisplayStyle={setDisplayStyle}
-                                    />
-
-                                    <div class="py-5">
-                                        <SearchBar
-                                            onSubmit={addNewSearchedCards}
-                                            resetSearchedCards={resetSearchedCards}
-                                            displayLoadingSpinner={setIsLoading}
-                                        />
-                                    </div>
-
-                                </CardSection>
-                
-
-                                <CardSectionScrollable>
-                                    <CardList
-                                        cards={searchedCards}
-                                        addCardToSelection={addCardInDeck}
-                                        displayStyle={displayStyle}
-                                    />
-                                </CardSectionScrollable>
-                                
-                            </Card>
+                            <DatabaseQueryCard 
+                                setDisplayStyle={setDisplayStyle}
+                                displayStyle={displayStyle}
+                                onSubmit={addNewSearchedCards}
+                                resetSearchedCards={resetSearchedCards}
+                                displayLoadingSpinner={setIsLoading}
+                                cards={searchedCards}
+                                addCardToSelection={addCardInDeck}
+                            />
                         </div>
 
-                        <div class="py-3 pr-">
-                            <Card title="Selection de cartes"> 
+                        <div class="py-3">
+                            <Card title="Deck"> 
                                 <div class="flex flex-row justify-center pb-4 ">
                                     <div class="flex flex-row border pr-7 rounded-r-3xl rounded-l-md border-gray-500">
                                         <DangerButton
                                             onClick={() => setCardDeck(new CardDeck([]))}
                                             text="Reset"
                                         />
-                                        <h2 class=" text-center my-3 pl-2 text-xl">Nombre de cartes : {cardDeck.getNumberOfCards()}</h2>
+                                        <h2 class=" text-center my-3 pl-2 text-xl">Nombre de cartes : {cardDeck.cardNumber}</h2>
                                     </div>
                                 </div>
 
@@ -150,14 +139,76 @@ function MTGApp()  {
                                 />
                             </Card>
                         </div>
+
+                        <div class="py-3 xl:col-span-3  md:cols-span-3 sm:cols-span-3">
+                            <Card title="Statistiques">                                
+                                <div class="py-2">
+                                    <ProgressBar progress={cardDeck.getTypeRatio("Creature")} label="Creature"/>
+                                </div>
+                                <div class="py-2">
+                                    <ProgressBar progress={cardDeck.getTypeRatio("Land")} label="Land"/>
+                                </div>
+                                <div class="py-2">
+                                    <ProgressBar progress={cardDeck.getTypeRatio("Instant")} label="Instant"/>
+                                </div>
+                                <div class="py-2">
+                                    <ProgressBar progress={cardDeck.getTypeRatio("Sorcery")} label="Sorcery"/>
+                                </div>
+                                <div class="py-2">
+                                    <ProgressBar progress={cardDeck.getTypeRatio("Artifact")} label="Artifact"/>
+                                </div>
+                                <div class="py-2">
+                                    <ProgressBar progress={cardDeck.getTypeRatio("Enchantment")} label="Enchantment"/>
+                                </div>
+                                <div class="py-2">
+                                    <ProgressBar progress={cardDeck.getTypeRatio("Planeswalker")} label="Planeswalker"/>
+                                </div>
+
+                        
+                            </Card>
+                        </div>
+                    
                     </div>
-
-
                 </div>
 
             </div>
         </>
     );
+}
+
+
+function DatabaseQueryCard(props)  {
+    return (
+        <Card title="Data Base">
+
+        <CardSection>
+            <DisplayPanel
+                setDisplayStyle={props.setDisplayStyle}
+            />
+
+            <div class="py-5">
+                <SearchBar
+                    onSubmit={props.onSubmit}
+                    resetSearchedCards={props.resetSearchedCards}
+                    displayLoadingSpinner={props.displayLoadingSpinner}
+                />
+            </div>
+
+        </CardSection>
+
+
+        <CardSectionScrollable>
+            <CardList
+                cards={props.cards}
+                addCardToSelection={props.addCardToSelection}
+                displayStyle={props.displayStyle}
+            />
+        </CardSectionScrollable>
+        
+    </Card>
+        
+    )
+
 }
 
 

@@ -2,6 +2,7 @@ import React from "react";
 import loupe from "../../asset/svg/loupe.png";
 import axios from "axios";
 import  {CardDataIndexor, CardDeck} from "../../util/CardData";
+import mockData from "../../mockData/mockCardData";
 
 
 function SearchBar(props) { 
@@ -16,15 +17,24 @@ function SearchBar(props) {
         props.resetSearchedCards();
         props.displayLoadingSpinner(true);
         
-        const resp = await axios.get(`https://api.scryfall.com/cards/search?q=${userName}`);
+        let cardData = mockData;
 
+        try  {
+            const resp = await axios.get(`https://api.scryfall.com/cards/search?q=${userName}`);
+            props.displayLoadingSpinner(false);
+            console.log(resp.data.da);
+            cardData = resp.data.data
+        } catch (error) {
+            console.error(error);
+        }
 
-        
-        props.displayLoadingSpinner(false);
-        const cardData = resp.data.data;
         for (var i = 0; i < cardData.length; i++) {
-            let cardData = new CardDataIndexor(resp.data.data[i]);
-            props.onSubmit(cardData.getCardData("English"));
+            let currenrCard = cardData[i];
+            if (currenrCard.image_uris != undefined) {
+                let carte  = new CardDataIndexor(cardData[i]);
+                console.log(carte);
+                props.onSubmit(carte.getCardData("English"));
+            }
         }
     }
 

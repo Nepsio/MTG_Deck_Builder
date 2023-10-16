@@ -4,11 +4,7 @@ class CardDataIndexor {
         this.data = new Map();
         this.data.set('English',
             new CardData ( 
-                data.name, 
-                data.image_uris.normal,
-                data.image_uris.art_crop,
-                data.name,
-                data.oracle_text
+                data
             )
         );
     }
@@ -27,12 +23,14 @@ class CardDataIndexor {
 class CardData {
 
 
-    constructor (name, img, croppedImg, ogName, description) {
-        this.name = name;
-        this.img = img;
-        this.croppedImg = croppedImg;
-        this.ogName = ogName;
-        this.description = description;
+    constructor (data) {
+        console.log(data);
+        this.name = data.name;
+        this.img = data.image_uris.normal;
+        this.croppedImg = data.image_uris.art_crop;
+        this.ogName = data.name;
+        this.description = data.oracle_text;
+        this.type = data.type_line;
     }
 
 }
@@ -57,7 +55,7 @@ class CardDeck {
         for (let i = 0; i < cardList.length; i++) {
             this.addCardInDeck(cardList[i]);
         }
-
+        this.cardNumber = this.getNumberOfCards();
     }
 
     addCardInDeck (card) {
@@ -67,6 +65,7 @@ class CardDeck {
         } else {
             cardDeckUnit.quantity++;
         }
+        this.cardNumber++;
         return this;
     }
 
@@ -82,6 +81,7 @@ class CardDeck {
         if (cardDeckUnit.quantity == 0) {
             this.deck.splice(this.deck.indexOf(cardDeckUnit), 1);
         }
+        this.cardNumber--;
         return this;
     }
 
@@ -114,7 +114,24 @@ class CardDeck {
         return res;
     }
 
+    getNumbreOfATypeOfCard (type) {
+        let res = 0;
+        for (let i = 0; i < this.deck.length; i++) {
+            if (this.deck[i].cardData.type.includes(type)) {
+                res += this.deck[i].quantity;
+            }
+        }
+        return res;
+    }
+
+
+    getTypeRatio (type) {
+        let res = this.getNumbreOfATypeOfCard(type);
+        let total = this.getNumberOfCards();
+        return Math.floor((res/total)*100);
+    }
+
 
 }
 
-export  {CardDataIndexor, CardData, CardDeck};
+export  {CardDataIndexor, CardData, CardDeck}; 

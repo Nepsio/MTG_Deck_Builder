@@ -2,7 +2,7 @@ import React from "react";
 import {Card, CardSection, CardSectionScrollable} from "./component/container/Card";
 import SearchBar from "./component/SearchBar";
 import {CardDisplayer, CardDisplayerListView, CardDisplayerDeck, CardDeckDisplayerListView} from "./component/CardDisplayer";
-import {ButtonWithIcon, DangerButton} from "./component/basic/Button";
+import {ButtonWithIcon, Button} from "./component/basic/Button";
 import Grid_box from "../asset/svg/Grid_box.svg";
 import CardListIcon from "../asset/svg/CardListIcon.png";
 import { CardDeck} from "../util/CardData";
@@ -107,7 +107,7 @@ function MTGApp()  {
 
                     <div class="grid xl:grid-cols-3  md:grid-cols-3 sm:grid-cols-1  ">
 
-                        <div class="py-3 xl:col-span-2  md:col-span-2 sm:col-span-1 pr-10">
+                        <div class="py-3 xl:col-span-2  md:col-span-2 sm:col-span-1 md:pr-10">
                             <DatabaseQueryCard 
                                 setDisplayStyle={setDisplayStyle}
                                 displayStyle={displayStyle}
@@ -123,9 +123,10 @@ function MTGApp()  {
                             <Card title="Deck"> 
                                 <div class="flex flex-row justify-center pb-4 ">
                                     <div class="flex flex-row border pr-7 rounded-r-3xl rounded-l-md border-gray-500">
-                                        <DangerButton
+                                        <Button
                                             onClick={() => setCardDeck(new CardDeck([]))}
                                             text="Reset"
+                                            buttonType = "danger"
                                         />
                                         <h2 class=" text-center my-3 pl-2 text-xl">Nombre de cartes : {cardDeck.cardNumber}</h2>
                                     </div>
@@ -214,17 +215,14 @@ function DatabaseQueryCard(props)  {
 
 function DisplayPanel(props) {
     return (
-        <div class="flex flex-row">
-        <div class="border flex flex-row  rounded border-gray-500 rounded-xl">   
-            <div class="px-5 border-r  border-gray-700  bg-gray-200 rounded-l-xl">
-               <p class="my-auto">Mode d'affichage :</p> 
-            </div>
+        <div class="flex flex-row justify-center">
             <div class="px-3"> 
                 <ButtonWithIcon
                     onClick={() => props.setDisplayStyle("list")}
                     image={CardListIcon}
                     text="List"
-                    customColor="blue"
+                    svgDescription = "M6 1h10v2H6V1zm0 6h10v2H6V7zm0 6h10v2H6v-2zM0 2a2 2 0 113.999-.001A2 2 0 010 2zm0 6a2 2 0 113.999-.001A2 2 0 010 8zm0 6a2 2 0 113.999-.001A2 2 0 010 14z"
+                    viewBox = "0 0 16 16"
                 />
             </div>
             <div class="pl-3">
@@ -232,10 +230,11 @@ function DisplayPanel(props) {
                     onClick={() => props.setDisplayStyle("grid")}
                     image={Grid_box}
                     text="Grid"
+                    svgDescription = "M1 2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1H2a1 1 0 01-1-1V2zm5 0a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1H7a1 1 0 01-1-1V2zm5 0a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1h-2a1 1 0 01-1-1V2zM1 7a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1H2a1 1 0 01-1-1V7zm5 0a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1H7a1 1 0 01-1-1V7zm5 0a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1h-2a1 1 0 01-1-1V7zM1 12a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1H2a1 1 0 01-1-1v-2zm5 0a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1H7a1 1 0 01-1-1v-2zm5 0a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1h-2a1 1 0 01-1-1v-2z"
+                    viewBox = "0 0 16 16"
                 />
             </div>
         </div>
-    </div>
     )
 
 }

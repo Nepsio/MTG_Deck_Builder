@@ -5,7 +5,7 @@ function Card(props) {
     const [displayBody, setDisplayBody] = React.useState(true);
 
     return (
-        <div class="w-full bg-white border border-gray-200 rounded-lg shadow  flex flex-col  dark:bg-gray-800 dark:border-gray-700">
+        <div class=" bg-white border border-gray-200 rounded-lg shadow  flex flex-col  dark:bg-gray-800 dark:border-gray-700">
            <div class="flex flex-wrap text-sm font-medium px-9  text-gray-50 border-b border-gray-200 rounded-t-lg bg-gray-800" id="defaultTab" data-tabs-toggle="#defaultTabContent" role="tablist">
                 <h2 class=" text-center mx-auto my-3  text-xl">{props.title}</h2>
                 <button onClick={() => setDisplayBody(!displayBody)} >
@@ -31,7 +31,7 @@ function Card(props) {
 
 function CardSection(props) {
     return  (
-            <div class="m-5">
+            <div class="">
                 {props.children}
             </div>
     );

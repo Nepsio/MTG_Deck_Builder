@@ -152,7 +152,7 @@ function CardDisplayerListView(props) {
                 </p>
                 <p class="text-xs text-neutral-500 dark:text-neutral-300">
                     <button onClick={() => props.addSelectedCards(props.card)}   class="
-                    text-center  bottom-0 left-0 h-auto w-auto  p-1 text-xl font-bold text-white bg-gradient-to-r from-green-400 via-green-500 to-green-700 hover:bg-gradient-to-br  rounded-md ">
+                    text-center  bottom-0 left-0 h-auto w-auto  p-1 text-xl font-bold text-white bg-green-400  rounded-md ">
                         <span class="mx-auto">Ajouter</span>
                     </button>
                 </p>

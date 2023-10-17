@@ -7,7 +7,6 @@ import Grid_box from "../asset/svg/Grid_box.svg";
 import CardListIcon from "../asset/svg/CardListIcon.png";
 import { CardDeck} from "../util/CardData";
 import { Fade} from 'react-awesome-reveal';
-import ProgressBar from "./component/basic/ProgressBar";
 
 
 const DeckList = (props) => {
@@ -71,13 +70,12 @@ function filterCardsWithImage(cards) {
     return res;
 }
 
-function MTGApp()  {
+function MTGApp(props)  {
 
     const [searchedCards, setSearchedCards] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(false);
     const [selectedCards, setSelectedCards] = React.useState([]);
     const [displayStyle, setDisplayStyle] = React.useState("grid");
-    const [cardDeck, setCardDeck] = React.useState(new CardDeck([]));
 
     const addNewSearchedCards = (cardData) => { 
         searchedCards.push(cardData);
@@ -86,13 +84,13 @@ function MTGApp()  {
 
     const addCardInDeck = (cardData) => {
         console.log(cardData);
-        cardDeck.addCardInDeck(cardData);
-        setCardDeck(new CardDeck(cardDeck.getCardList()));
+        props.deck.addCardInDeck(cardData);
+        props.setDeck(new CardDeck(props.deck.getCardList()));
     }
 
     const removeCardInDeck = (cardData) => {
-        cardDeck.removeCardInDeck(cardData);
-        setCardDeck(new CardDeck(cardDeck.getCardList()));
+        props.deck.removeCardInDeck(cardData);
+        props.setDeck(new CardDeck(props.deck.getCardList()));
     }
 
     const resetSearchedCards = () => {
@@ -124,17 +122,17 @@ function MTGApp()  {
                                 <div class="flex flex-row justify-center pb-4 ">
                                     <div class="flex flex-row border pr-7 rounded-r-3xl rounded-l-xl border-gray-500">
                                         <IconButton
-                                            onClick={() => setCardDeck(new CardDeck([]))}
+                                            onClick={() => props.setDeck(new CardDeck([]))}
                                             buttonType = "danger"
                                             svgDescription = "M2 5v10c0 .55.45 1 1 1h9c.55 0 1-.45 1-1V5H2zm3 9H4V7h1v7zm2 0H6V7h1v7zm2 0H8V7h1v7zm2 0h-1V7h1v7zM13.25 2H10V.75A.753.753 0 009.25 0h-3.5A.753.753 0 005 .75V2H1.75a.752.752 0 00-.75.75V4h13V2.75a.752.752 0 00-.75-.75zM9 2H6v-.987h3V2z"
                                             viewBox = "0 0 16 16"
                                         />
-                                        <h2 class=" text-center my-3 pl-2 text-xl">Nombre de cartes : {cardDeck.cardNumber}</h2>
+                                        <h2 class=" text-center my-3 pl-2 text-xl">Nombre de cartes : {props.deck.cardNumber}</h2>
                                     </div>
                                 </div>
 
                                 <DeckList
-                                    cards={cardDeck.deck}
+                                    cards={props.deck.deck}
                                     displayStyle={displayStyle}
                                     addCardToSelection={addCardInDeck}
                                     removeCardInDeck={removeCardInDeck}
@@ -142,33 +140,7 @@ function MTGApp()  {
                             </Card>
                         </div>
 
-                        <div class="py-3 xl:col-span-3  md:cols-span-3 sm:cols-span-3">
-                            <Card title="Statistiques">                                
-                                <div class="py-2">
-                                    <ProgressBar progress={cardDeck.getTypeRatio("Creature")} label="Creature"/>
-                                </div>
-                                <div class="py-2">
-                                    <ProgressBar progress={cardDeck.getTypeRatio("Land")} label="Land"/>
-                                </div>
-                                <div class="py-2">
-                                    <ProgressBar progress={cardDeck.getTypeRatio("Instant")} label="Instant"/>
-                                </div>
-                                <div class="py-2">
-                                    <ProgressBar progress={cardDeck.getTypeRatio("Sorcery")} label="Sorcery"/>
-                                </div>
-                                <div class="py-2">
-                                    <ProgressBar progress={cardDeck.getTypeRatio("Artifact")} label="Artifact"/>
-                                </div>
-                                <div class="py-2">
-                                    <ProgressBar progress={cardDeck.getTypeRatio("Enchantment")} label="Enchantment"/>
-                                </div>
-                                <div class="py-2">
-                                    <ProgressBar progress={cardDeck.getTypeRatio("Planeswalker")} label="Planeswalker"/>
-                                </div>
 
-                        
-                            </Card>
-                        </div>
                     
                     </div>
                 </div>

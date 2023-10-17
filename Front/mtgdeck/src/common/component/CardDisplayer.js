@@ -1,6 +1,6 @@
 import React from "react";
 import { Slide, Fade} from 'react-awesome-reveal';
-
+import { Button } from "./basic/Button";
 
 
 
@@ -151,10 +151,12 @@ function CardDisplayerListView(props) {
                     Descrition : {props.card.description}
                 </p>
                 <p class="text-xs text-neutral-500 dark:text-neutral-300">
-                    <button onClick={() => props.addSelectedCards(props.card)}   class="
-                    text-center  bottom-0 left-0 h-auto w-auto  p-1 text-xl font-bold text-white bg-green-400  rounded-md ">
-                        <span class="mx-auto">Ajouter</span>
-                    </button>
+                    <Button
+                        text="Ajouter"
+                        buttonType="success"
+                        onClick={() => props.addSelectedCards(props.card)}
+                    >
+                    </Button>
                 </p>
             </div>
         </div>

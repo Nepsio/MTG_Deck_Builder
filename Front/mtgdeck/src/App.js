@@ -2,10 +2,14 @@ import './App.css';
 import React from 'react';
 import MTGApp from './common/MTGApp';
 import Footer from './common/Footer';
+import { CardDeck} from './util/CardData';
+
 
 
 function App() {
   const [page, setPage] = React.useState("DeckBuilder");
+
+
 
   return (
       <>

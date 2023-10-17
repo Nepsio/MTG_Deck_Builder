@@ -5,8 +5,8 @@ function Card(props) {
     const [displayBody, setDisplayBody] = React.useState(true);
 
     return (
-        <div class=" bg-white border border-gray-200 rounded-lg shadow  flex flex-col  dark:bg-gray-800 dark:border-gray-700">
-           <div class="flex flex-wrap text-sm font-medium px-9  text-gray-50 border-b border-gray-200 rounded-t-lg bg-gray-800" id="defaultTab" data-tabs-toggle="#defaultTabContent" role="tablist">
+        <div class=" bg-white border border-gray-200 rounded-lg shadow  flex flex-col  dark:bg-gray-600 ">
+           <div class="flex flex-wrap text-sm font-medium px-9  text-gray-50 border-b border-gray-200 rounded-t-lg bg-gray-700" id="defaultTab" data-tabs-toggle="#defaultTabContent" role="tablist">
                 <h2 class=" text-center mx-auto my-3  text-xl">{props.title}</h2>
                 <button onClick={() => setDisplayBody(!displayBody)} >
                     <img src={eye}   class="w-5 h-5"/> 

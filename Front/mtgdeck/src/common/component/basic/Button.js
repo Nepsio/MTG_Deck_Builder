@@ -19,6 +19,23 @@ function ButtonWithIcon(props) {
   );
 }
 
+function IconButton(props) {
+  const buttonColorClass = getButtonStyleClass(props.buttonType);
+  return ( 
+    <button 
+        type="button" 
+        class={` text-white ${buttonColorClass}   font-medium rounded-lg text-sm text-center inline-flex items-center  `}
+        onClick={props.onClick}
+    >
+        <div class="px-5">
+          <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox={props.viewBox}>
+              <path fillRule="evenodd" d={props.svgDescription} clipRule="evenodd"/>
+          </svg>
+        </div>
+    </button>  
+  );
+}
+
 function Button(props) {
   const buttonColorClass = getButtonStyleClass(props.buttonType);
   return (
@@ -55,4 +72,4 @@ function getButtonStyleClass(buttonType) {
     }
   }
 
-export  {ButtonWithIcon, Button};
+export  {ButtonWithIcon, Button , IconButton};

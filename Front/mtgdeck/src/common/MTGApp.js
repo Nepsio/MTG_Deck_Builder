@@ -2,7 +2,7 @@ import React from "react";
 import {Card, CardSection, CardSectionScrollable} from "./component/container/Card";
 import SearchBar from "./component/SearchBar";
 import {CardDisplayer, CardDisplayerListView, CardDisplayerDeck, CardDeckDisplayerListView} from "./component/CardDisplayer";
-import {ButtonWithIcon, Button} from "./component/basic/Button";
+import {ButtonWithIcon, Button, IconButton} from "./component/basic/Button";
 import Grid_box from "../asset/svg/Grid_box.svg";
 import CardListIcon from "../asset/svg/CardListIcon.png";
 import { CardDeck} from "../util/CardData";
@@ -122,11 +122,12 @@ function MTGApp()  {
                         <div class="py-3">
                             <Card title="Deck"> 
                                 <div class="flex flex-row justify-center pb-4 ">
-                                    <div class="flex flex-row border pr-7 rounded-r-3xl rounded-l-md border-gray-500">
-                                        <Button
+                                    <div class="flex flex-row border pr-7 rounded-r-3xl rounded-l-xl border-gray-500">
+                                        <IconButton
                                             onClick={() => setCardDeck(new CardDeck([]))}
-                                            text="Reset"
                                             buttonType = "danger"
+                                            svgDescription = "M2 5v10c0 .55.45 1 1 1h9c.55 0 1-.45 1-1V5H2zm3 9H4V7h1v7zm2 0H6V7h1v7zm2 0H8V7h1v7zm2 0h-1V7h1v7zM13.25 2H10V.75A.753.753 0 009.25 0h-3.5A.753.753 0 005 .75V2H1.75a.752.752 0 00-.75.75V4h13V2.75a.752.752 0 00-.75-.75zM9 2H6v-.987h3V2z"
+                                            viewBox = "0 0 16 16"
                                         />
                                         <h2 class=" text-center my-3 pl-2 text-xl">Nombre de cartes : {cardDeck.cardNumber}</h2>
                                     </div>

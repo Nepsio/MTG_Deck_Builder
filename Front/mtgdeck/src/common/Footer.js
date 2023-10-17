@@ -5,7 +5,7 @@ function Footer (props) {
 
 
     return (
-        <footer class="sticky z-50 bg-gray-800 bottom-0  ">
+        <footer class="sticky z-50 bg-gray-900 bottom-0  ">
             <div class="flex space-x-5 justify-center md:mt-0">
                 <SVGButton 
                     viewBox="0 0 576 512"

@@ -1,3 +1,25 @@
+function ManaPickerButton(props) {
+  const buttonColorClass = getButtonStyleClass("dark");
+
+  return (
+    
+    <button 
+        type="button" 
+        class={` text-white ${buttonColorClass}  h-auto  w-16  max-h-12 max-w-24 font-medium rounded-full text-sm text-center grid grid-cols-2 `}
+        onClick={props.onClick}
+    >
+        <div class="">
+          <img class="w-auto l-auto"  src={props.image} alt="Card List Icon" />
+        </div>
+        <p class="text-white pl-1  border-blue-900">
+            +1
+        </p>
+    </button>
+  );
+}
+
+
+
 function ButtonWithIcon(props) {
   const buttonColorClass = getButtonStyleClass(props.buttonType);
 
@@ -12,7 +34,7 @@ function ButtonWithIcon(props) {
               <path fillRule="evenodd" d={props.svgDescription} clipRule="evenodd"/>
           </svg>
         </div>
-        <p class="text-white pl-1  border-blue-900 py-2.5 px-">
+        <p class="text-white pl-1  border-blue-900 py-2.5 ">
             {props.text}
         </p>
     </button>
@@ -72,4 +94,4 @@ function getButtonStyleClass(buttonType) {
     }
   }
 
-export  {ButtonWithIcon, Button , IconButton};
+export  {ButtonWithIcon, Button , IconButton, ManaPickerButton};

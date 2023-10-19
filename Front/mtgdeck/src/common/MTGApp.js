@@ -6,7 +6,8 @@ import {ButtonWithIcon, Button, IconButton} from "./component/basic/Button";
 import Grid_box from "../asset/svg/Grid_box.svg";
 import CardListIcon from "../asset/svg/CardListIcon.png";
 import { CardDeck} from "../util/CardData";
-import { Fade} from 'react-awesome-reveal';
+import { Fade } from 'react-awesome-reveal';
+import ManaPicker from "./component/pageComponent/mtgApp/ManaPicker";
 
 
 const DeckList = (props) => {
@@ -165,6 +166,10 @@ function DatabaseQueryCard(props)  {
                     onSubmit={props.onSubmit}
                     resetSearchedCards={props.resetSearchedCards}
                     displayLoadingSpinner={props.displayLoadingSpinner}
+                />
+
+                <ManaPicker
+                    addCardToSelection={props.addCardToSelection}
                 />
             </div>
 

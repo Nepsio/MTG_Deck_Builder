@@ -134,30 +134,30 @@ function CardDeckDisplayerListView(props) {
 function CardDisplayerListView(props) {
     return (
         <div
-            class="grid grid-cols-2 rounded-xl border-2 bg-gray-100 border border-gray-950 shadow-xl " 
+            class="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-2 rounded-xl border-2 bg-gray-100 border border-gray-950 shadow-xl " 
         >   
             
             <img
-                class="h-auto w-auto bg-black rounded-l-md"
+                class="h-auto w-auto bg-black rounded-l-md   "
                 src={props.card.img}
                 alt="" 
             />
-            <div class="flex flex-col justify-start p-6">
+            <div class="flex flex-col  p-6 ">
                 <h5
                 class="mb-2 text-xl font-medium text-neutral-800 dark:text-neutral-50">
                     Name :  {props.card.name}
                 </h5>
-                <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-                    Descrition : {props.card.description}
+                <p class="mb-4 text-base text-neutral-600  dark:text-neutral-200 overflow-y-auto">
+                    Description : {props.card.description}
                 </p>
-                <p class="text-xs text-neutral-500 dark:text-neutral-300">
+                <div class="text-xs text-neutral-500 justify-center dark:text-neutral-300">
                     <Button
                         text="Ajouter"
                         buttonType="success"
                         onClick={() => props.addSelectedCards(props.card)}
                     >
                     </Button>
-                </p>
+                </div>
             </div>
         </div>
     )

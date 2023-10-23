@@ -20,6 +20,10 @@ class CardDataIndexor {
   
 }
 
+/**
+ * Classe permettant de stocker les données importantes d'une carte
+ * @param {*} data les données de la carte recu par API
+*/
 class CardData {
 
 
@@ -35,7 +39,9 @@ class CardData {
 
 }
 
-
+/**
+ * Classe représentant une carte dans un deck
+ */
 class CardDeckUnit {
 
     constructor (card, quantity) {
@@ -48,6 +54,9 @@ class CardDeckUnit {
     }
 }
 
+/**
+ * Classe représentant un deck
+*/
 class CardDeck {
 
     constructor (cardList) { 
@@ -58,6 +67,11 @@ class CardDeck {
         this.cardNumber = this.getNumberOfCards();
     }
 
+    /**
+     * Ajoute une occurence d'une carte dans les deck
+     * @param {*} card la carte à ajouter
+     * @returns 
+     */
     addCardInDeck (card) {
         let cardDeckUnit = this.findCardByOGName(card.ogName);
         if (cardDeckUnit == undefined) {
@@ -69,6 +83,11 @@ class CardDeck {
         return this;
     }
 
+    /**
+     * Supprime une occurence d'une carte dans les deck
+     * @param {*} card la carte à supprimer
+     * @returns 
+     */
     removeCardInDeck (card) {
         let cardDeckUnit = this.findCardByOGName(card.ogName);
         if (cardDeckUnit != undefined) {
@@ -124,7 +143,11 @@ class CardDeck {
         return res;
     }
 
-
+    /**
+     * Permet de récupérer le ratio d'un type de carte dans le deck
+     * @param {*} type  Le type de carte
+     * @returns la valeur du ratio en pourcentage
+     */
     getTypeRatio (type) {
         let res = this.getNumbreOfATypeOfCard(type);
         let total = this.getNumberOfCards();

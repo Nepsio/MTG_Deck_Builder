@@ -1,3 +1,12 @@
+
+
+/**
+ * Composant representant les button du mana picker
+ * @param {*} props : 
+ * - image : L'image du bouton
+ * - onClick : La fonction à appeler lors du clic sur le bouton
+ * @returns 
+ */
 function ManaPickerButton(props) {
   const buttonColorClass = getButtonStyleClass("dark");
 
@@ -20,6 +29,16 @@ function ManaPickerButton(props) {
 
 
 
+/**
+ * Composant representant un bouton avec une icone et un texte
+ * @param {*} props :
+ * - text : Le texte du bouton
+ * - buttonType : Le type de bouton souhaité
+ * - onClick : La fonction à appeler lors du clic sur le bouton
+ * - viewBox : La viewBox du SVG
+ * - svgDescription : La description du vecteur du SVG
+ * @returns 
+ */
 function ButtonWithIcon(props) {
   const buttonColorClass = getButtonStyleClass(props.buttonType);
 
@@ -41,6 +60,14 @@ function ButtonWithIcon(props) {
   );
 }
 
+/**
+ * Composant bouton avec uniquement une icone
+ * @param {*} props :
+ * - buttonType : Le type de bouton souhaité
+ * - onClick : La fonction à appeler lors du clic sur le bouton
+ * - viewBox : La viewBox du SVG
+ * - svgDescription : La description du vecteur du SVG
+ */
 function IconButton(props) {
   const buttonColorClass = getButtonStyleClass(props.buttonType);
   return ( 
@@ -58,6 +85,13 @@ function IconButton(props) {
   );
 }
 
+/**
+ * Composant bouton simple
+ * @param {*} props :
+ *  - text : Le texte du bouton
+ *  - buttonType : Le type de bouton souhaité
+ *  - onClick : La fonction à appeler lors du clic sur le bouton
+ */
 function Button(props) {
   const buttonColorClass = getButtonStyleClass(props.buttonType);
   return (
@@ -71,6 +105,12 @@ function Button(props) {
   );
 }
 
+
+/**
+ * Retourne la classe de couleur du bouton en fonction du type de bouton souhaité
+ * @param {*} buttonType Le type de bouton souhaité
+ * @returns Des classes CSS correspondant à la couleur du bouton
+ */
 function getButtonStyleClass(buttonType) {
     switch (buttonType) {
       case "primary":

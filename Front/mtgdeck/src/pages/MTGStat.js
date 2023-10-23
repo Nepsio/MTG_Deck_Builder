@@ -3,7 +3,11 @@ import ProgressBar from "../common/component/basic/ProgressBar";
 import  {Card, CardSection, CardSectionScrollable} from "../common/component/container/Card";
 import { Slide } from "react-awesome-reveal";
 
-
+/**
+ * Composant représentant la page de statistique du deck
+ * @param {*} props 
+ * @returns 
+ */
 function MTGStat(props) {
     return (
         <div className="p-5">

@@ -3,19 +3,30 @@ import { Slide, Fade} from 'react-awesome-reveal';
 import { Button } from "./basic/Button";
 
 
-
+/**
+ * Component representant l'affichage d'une carte dans une grille
+ * @param {*} props :
+ * - card : La carte à afficher
+ * - addSelectedCards : La fonction permettant d'ajouter une carte au deck
+ */
 function CardDisplayer(props) {
     return (
         <div class=" my-2  hover:shadow-2xl rounded-xl hover:shadow-blue-700" onClick={() => props.addSelectedCards(props.card)} >
             <img src={props.card.img} alt={props.card.img} class="w-auto h-auto object-cover object-center rounded-lg shadow-md"/>
             
         </div>        
-
-
     );
 }
 
-
+/**
+ * Component representant l'affichage d'une carte dans une grille dans le deck
+ * @param {*} props :
+ * - card : La carte à afficher
+ * - addSelectedCards : La fonction permettant d'ajouter une carte au deck
+ * - removeCardInDeck : La fonction permettant de retirer une carte du deck
+ * - count : Le nombre d'occurence de la carte dans le deck
+ * @returns 
+ */
 function CardDisplayerDeck(props) {
     return (
         <div class="bg-black flex my-2 relative flex-col border border-2 border-black  rounded-xl border-t-0">
@@ -47,7 +58,15 @@ function CardDisplayerDeck(props) {
     );
 }
 
-
+/**
+ * Component representant l'affichage d'une carte dans une liste dans le deck
+ * @param {*} props :
+ * - card : La carte à afficher
+ * - addSelectedCards : La fonction permettant d'ajouter une carte au deck
+ * - removeCardInDeck : La fonction permettant de retirer une carte du deck
+ * - count : Le nombre d'occurence de la carte dans le deck
+ * @returns 
+ */
 function CardDeckDisplayerListView(props) {
 
     const [isHovering, setIsHovering] = React.useState(false);
@@ -131,6 +150,13 @@ function CardDeckDisplayerListView(props) {
         );
 }
 
+/**
+ * Component representant l'affichage d'une carte dans une liste
+ * @param {} props :
+ * - card : La carte à afficher
+ * - addSelectedCards : La fonction permettant d'ajouter une carte au deck
+ * @returns 
+ */
 function CardDisplayerListView(props) {
     return (
         <div
@@ -163,6 +189,13 @@ function CardDisplayerListView(props) {
     )
 }
 
+
+/**
+ * Composant representant l'affichage d'une carte dans une fenetre modale
+ * @param {*} props :
+ * - card : La carte à afficher
+ * - setDisplayModal : La fonction permettant de changer l'affichage de la fenetre modale
+ */
 function ModalView(props) {
     return (
         <>  

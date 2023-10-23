@@ -1,9 +1,13 @@
 import React from "react";
 
+/**
+ * Composant représentant le footer de l'application
+ * @param {*} props : 
+ * - setPages : La fonction permettant de changer la page
+ * - currentPage : La page courante
+ */
 function Footer (props) {
     const [activePage, setActivePage] = React.useState("DeckBuilder");
-
-
     return (
         <footer class="sticky z-50 bg-gray-900 bottom-0  ">
             <div class="flex space-x-5 justify-center md:mt-0">
@@ -44,7 +48,7 @@ function SVGButton(props) {
 
 
 function setCurrentPage (page, setPages, setActivePage ) {
-   setPages(page);
+    setPages(page);
     setActivePage(page); 
 }
 

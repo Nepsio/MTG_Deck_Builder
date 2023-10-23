@@ -9,7 +9,14 @@ import { CardDeck} from "../util/CardData";
 import { Fade } from 'react-awesome-reveal';
 import ManaPicker from "./component/pageComponent/mtgApp/ManaPicker";
 
-
+/**
+ * Component permettant d'afficher la liste des cartes du deck
+ * @param {*} props : 
+ * - cards : La liste des cartes du deck
+ * - displayStyle : Le style d'affichage des cartes
+ * - addCardToSelection : La fonction permettant d'ajouter une carte à la sélection
+ * - removeCardInDeck : La fonction permettant de supprimer une carte du deck
+ */
 const DeckList = (props) => {
     console.log(props.cards);
     const [modalIsDisplayed, setModalIsDisplayed] = React.useState(false);
@@ -30,7 +37,14 @@ const DeckList = (props) => {
 
 }
 
-
+/**
+ * Component permettant d'afficher la liste des cartes
+ * @param {*} props :
+ * - cards : La liste des cartes
+ * - displayStyle : Le style d'affichage des cartes
+ * - addCardToSelection : La fonction permettant d'ajouter une carte à la sélection
+ * @returns 
+ */
 const CardList = (props) => {
     let filteredCards = filterCardsWithImage(props.cards);
     if (props.displayStyle == "list") {
@@ -60,7 +74,11 @@ const CardList = (props) => {
     }
 }
 
-
+/**
+ * Filtre les cartes qui n'ont pas d'image
+ * @param {*} cards Liste de cartes à afficher
+ * @returns 
+ */
 function filterCardsWithImage(cards) {
     let res = [];
     for (let i = 0; i < cards.length; i++) {
@@ -71,6 +89,11 @@ function filterCardsWithImage(cards) {
     return res;
 }
 
+/**
+ * Component permettant de construire un deck
+ * @param {*} props 
+ * @returns 
+ */
 function MTGApp(props)  {
 
     const [searchedCards, setSearchedCards] = React.useState([]);
@@ -151,7 +174,11 @@ function MTGApp(props)  {
     );
 }
 
-
+/**
+ * Card permettant de faire une recherche dans la base de données
+ * @param {*} props 
+ * @returns 
+ */
 function DatabaseQueryCard(props)  {
     return (
         <Card title="Data Base">
@@ -190,7 +217,11 @@ function DatabaseQueryCard(props)  {
 
 }
 
-
+/**
+ * Composant permettant de changer le style d'affichage des cartes
+ * @param {*} props 
+ * @returns 
+ */
 function DisplayPanel(props) {
     return (
         <div class="flex flex-row justify-center">

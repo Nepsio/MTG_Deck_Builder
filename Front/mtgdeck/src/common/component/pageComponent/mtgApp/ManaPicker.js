@@ -9,6 +9,11 @@ import { forestCardData , mountainCardData, swampCardData, islandCardData, plain
 import { CardData } from "../../../../util/CardData";
 
 
+/**
+ * Composant permettant de choisir une couleur de mana
+ * @param {} props : 
+ *  - addCardToSelection : fonction permettant d'ajouter une carte à la sélection
+ */
 function ManaPicker (props) {
     return (
         <div class="grid grid-cols-5 pt-5 ">

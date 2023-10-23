@@ -5,6 +5,15 @@ import  {CardDataIndexor, CardDeck} from "../../util/CardData";
 import mockData from "../../mockData/mockCardData";
 
 
+/**
+ * Composant représentant la barre de recherche de carte
+ * @param {*} props :
+ * - onSubmit : La fonction à appeler lors de la soumission du formulaire
+ * - resetSearchedCards : La fonction permettant de réinitialiser les cartes recherchées
+ * - displayLoadingSpinner : La fonction permettant d'afficher ou non le spinner de chargement
+ * - cardData : Les données de la carte
+ * - cardDeck : Le deck de carte
+ */
 function SearchBar(props) { 
     const [userName, setUserName] = React.useState('');
     const usernameInputRef = React.useRef();
